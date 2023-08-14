@@ -1,0 +1,3 @@
+2023-08-14 21:28:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PAINTING" not found; SQL statement:
+drop table painting [42102-214]
