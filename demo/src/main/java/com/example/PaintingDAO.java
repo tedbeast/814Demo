@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PaintingDAO {
@@ -37,26 +38,29 @@ public class PaintingDAO {
             e.printStackTrace();
         }
     }
-    public void insertPainting(){
+    public void insertPainting(String title){
         try{
             // insert something into the table
-            PreparedStatement ps3 = conn.prepareStatement("insert into painting (title) values ('guernica')");
+            PreparedStatement ps3 = conn.prepareStatement("insert into painting (title) values (?)");
+            ps3.setString(1, title);
             ps3.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
         }
     }
     public List<String> getAllPaintingNames(){
+        List<String> paintings = new ArrayList<>();
         try{
             // query everything from the table and display the result
             PreparedStatement ps4 = conn.prepareStatement("select * from painting");
             ResultSet rs = ps4.executeQuery();
             while(rs.next()){
-                System.out.println(rs.getString("title"));
+                // loop through every row in my result set, until it has no more items
+                paintings.add(rs.getString("title"));
             }
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return null;
+        return paintings;
     }
 }
